@@ -1,0 +1,19 @@
+services:
+  broker:
+    image: eclipse-mosquitto:2
+    container_name: broker
+    env_file: .env
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+    command: sh -c "mosquitto_passwd -b -c /tmp/pwfile $$MQTT_USER $$MQTT_PASSWORD && chown mosquitto:mosquitto /tmp/pwfile && mosquitto -c /mosquitto/config/mosquitto.conf"
+
+  sensor:
+    image: python:3.12-slim
+    container_name: sensor
+    env_file: .env
+    volumes:
+      - .:/app
+    depends_on:
+      - broker
+    restart: on-failure
+    command: sh -c "pip install -q paho-mqtt && python -u /app/sensors.py"
