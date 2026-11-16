@@ -5,7 +5,7 @@ services:
     env_file: .env
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
-    command: sh -c "mosquitto_passwd -b -c /tmp/pwfile $$MQTT_USER $$MQTT_PASSWORD && chown mosquitto:mosquitto /tmp/pwfile && mosquitto -c /mosquitto/config/mosquitto.conf"
+    command: sh -c "rm -f /tmp/pwfile && mosquitto_passwd -b -c /tmp/pwfile k72 hownd && mosquitto -c /mosquitto/config/mosquitto.conf"
 
   sensor:
     image: python:3.12-slim
