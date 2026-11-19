@@ -78,11 +78,11 @@ while True:
     for salle, info in salles.items():
         # Si ventilation ON -> les valeurs redescendent à la normale
         if info["ventilation"] == "ON":
-            temperature = round(random.uniform(19, 22), 1)
-            co2 = random.randint(400, 550)
+            temperature = round(random.uniform(15, 20), 1)
+            co2 = random.randint(300, 750)
         else:
-            temperature = round(random.uniform(22, 32), 1)
-            co2 = random.randint(600, 1200)
+            temperature = round(random.uniform(27, 35), 1)
+            co2 = random.randint(690, 1200)
         humidite = random.randint(35, 70)
 
         # Message au format JSON (id, horodatage et valeurs)

@@ -7,6 +7,8 @@ services:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
     command: sh -c "rm -f /tmp/pwfile && mosquitto_passwd -b -c /tmp/pwfile k72 hownd && chown mosquitto:mosquitto /tmp/pwfile && mosquitto -c /mosquitto/config/mosquitto.conf"
 
+
+
   sensor:
     image: python:3.12-slim
     container_name: sensor
@@ -16,4 +18,19 @@ services:
     depends_on:
       - broker
     restart: on-failure
+   
     command: sh -c "pip install -q paho-mqtt && python -u /app/sensors.py"
+  
+  
+  nodered:
+    image: nodered/node-red:latest
+    container_name: nodered
+    ports:
+      - "1880:1880"
+    volumes:
+      - nodered_data:/data
+    depends_on:
+      - broker
+
+volumes:
+  nodered_data:
