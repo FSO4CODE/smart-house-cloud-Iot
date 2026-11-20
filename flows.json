@@ -1,15 +1,15 @@
 [
     {
-        "id": "f6f2187d.f17ca8",
+        "id": "f88d1ae351fa23a2",
         "type": "tab",
         "label": "Flow 1",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "3cc11d24.ff01a2",
+        "id": "c443d0cfd9a0fa2a",
         "type": "comment",
-        "z": "f6f2187d.f17ca8",
+        "z": "f88d1ae351fa23a2",
         "name": "WARNING: please check you have started this container with a volume that is mounted to /data\\n otherwise any flow changes are lost when you redeploy or upgrade the container\\n (e.g. upgrade to a more recent node-red docker image).\\n  If you are using named volumes you can ignore this warning.\\n Double click or see info side panel to learn how to start Node-RED in Docker to save your work",
         "info": "\nTo start docker with a bind mount volume (-v option), for example:\n\n```\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n```\n\nwhere `/home/user/node_red_data` is a directory on your host machine where you want to store your flows.\n\nIf you do not do this then you can experiment and redploy flows, but if you restart or upgrade the container the flows will be disconnected and lost. \n\nThey will still exist in a hidden data volume, which can be recovered using standard docker techniques, but that is much more complex than just starting with a named volume as described above.",
         "x": 350,
@@ -17,180 +17,198 @@
         "wires": []
     },
     {
-        "id": "a66fe15be97a3cf6",
+        "id": "2282eff3772f9c84",
         "type": "mqtt in",
-        "z": "f6f2187d.f17ca8",
+        "z": "f88d1ae351fa23a2",
         "name": "sensore room 1",
         "topic": "smartenv/salle1/mesures",
         "qos": "2",
         "datatype": "auto-detect",
-        "broker": "8ecb9d1287f1189a",
+        "broker": "12635b852e5a1d66",
         "nl": false,
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 120,
-        "y": 260,
+        "x": 180,
+        "y": 500,
         "wires": [
             [
-                "bb278cd44164a879"
+                "f29b8ce3796fca29"
             ]
         ]
     },
     {
-        "id": "bb278cd44164a879",
+        "id": "f29b8ce3796fca29",
         "type": "json",
-        "z": "f6f2187d.f17ca8",
+        "z": "f88d1ae351fa23a2",
         "name": "",
         "property": "payload",
         "action": "",
         "pretty": false,
-        "x": 290,
-        "y": 260,
+        "x": 350,
+        "y": 500,
         "wires": [
             [
-                "260b9aa3ad498034"
+                "6acf0076321c130f"
             ]
         ]
     },
     {
-        "id": "bbaf80ef3a9d2a9a",
+        "id": "253671d20a093ea8",
         "type": "mqtt in",
-        "z": "f6f2187d.f17ca8",
+        "z": "f88d1ae351fa23a2",
         "name": "sensor room 2",
         "topic": "smartenv/salle2/mesures",
         "qos": "2",
         "datatype": "auto-detect",
-        "broker": "8ecb9d1287f1189a",
+        "broker": "12635b852e5a1d66",
         "nl": false,
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 110,
-        "y": 400,
+        "x": 170,
+        "y": 640,
         "wires": [
             [
-                "21dd809481dbf9fa"
+                "1944469a00b45256"
             ]
         ]
     },
     {
-        "id": "ba3d0066a8f4c317",
+        "id": "34a6f9f4b8405e35",
         "type": "mqtt in",
-        "z": "f6f2187d.f17ca8",
+        "z": "f88d1ae351fa23a2",
         "name": "sensor room 3",
         "topic": "smartenv/salle2/mesures",
         "qos": "2",
         "datatype": "auto-detect",
-        "broker": "8ecb9d1287f1189a",
+        "broker": "12635b852e5a1d66",
         "nl": false,
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 110,
-        "y": 520,
+        "x": 170,
+        "y": 760,
         "wires": [
             [
-                "806f9de1a7bd566b"
+                "f6a46f5361cbe549"
             ]
         ]
     },
     {
-        "id": "21dd809481dbf9fa",
+        "id": "1944469a00b45256",
         "type": "json",
-        "z": "f6f2187d.f17ca8",
+        "z": "f88d1ae351fa23a2",
         "name": "",
         "property": "payload",
         "action": "",
         "pretty": false,
-        "x": 290,
-        "y": 400,
+        "x": 350,
+        "y": 640,
         "wires": [
             [
-                "e01d2f23c621d6f5"
+                "0cc3b29095e386f5"
             ]
         ]
     },
     {
-        "id": "806f9de1a7bd566b",
+        "id": "f6a46f5361cbe549",
         "type": "json",
-        "z": "f6f2187d.f17ca8",
+        "z": "f88d1ae351fa23a2",
         "name": "",
         "property": "payload",
         "action": "",
         "pretty": false,
-        "x": 290,
-        "y": 520,
+        "x": 350,
+        "y": 760,
         "wires": [
             [
-                "38980eca13c00fe6"
+                "37117c7c3305944a"
             ]
         ]
     },
     {
-        "id": "260b9aa3ad498034",
+        "id": "6acf0076321c130f",
         "type": "function",
-        "z": "f6f2187d.f17ca8",
+        "z": "f88d1ae351fa23a2",
         "name": "function 1",
-        "func": "const data = msg.payload\nif (data.co2 > 800 || data.temperature > 26){\n    msg.payload =\"ON\"\n}else{\n    msg.payload = \"OFF\"\n}\nmsg.topic = \"smart/salle1/ventilation\"\nreturn msg;\n",
-        "outputs": 1,
+        "func": "const data = (typeof msg.payload === \"string\") ? JSON.parse(msg.payload) : msg.payload;\nconst modeAuto = flow.get(\"auto_salle1\") ?? true; // Automatique par défaut\n\nlet msgVentilation = null;\n\nif (modeAuto) {\n    let commande = (data.co2 > 800 || data.temperature > 26) ? \"ON\" : \"OFF\";\n    msgVentilation = { topic: \"smartenv/salle1/ventilation\", payload: commande };\n}\n\nreturn [\n    msgVentilation,                // Sortie 1 : ignorée si Mode Automatique est OFF\n    { payload: data.temperature }, // Sortie 2 : Jauge Température\n    { payload: data.humidite },    // Sortie 3 : Jauge Humidité\n    { payload: data.co2 }          // Sortie 4 : Jauge CO2\n];",
+        "outputs": 4,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 460,
-        "y": 260,
+        "x": 520,
+        "y": 500,
         "wires": [
             [
-                "68befcfd4b1b64f7"
+                "0974c0b3b766acbb",
+                "baf946ed2d7750eb"
+            ],
+            [
+                "4f8bf5236b1f516e"
+            ],
+            [
+                "f78aaf7a538342b5",
+                "23a01241ad5a3f58"
+            ],
+            [
+                "9925b4544e4f8547"
             ]
         ]
     },
     {
-        "id": "e01d2f23c621d6f5",
+        "id": "0cc3b29095e386f5",
         "type": "function",
-        "z": "f6f2187d.f17ca8",
+        "z": "f88d1ae351fa23a2",
         "name": "function 2",
-        "func": "const data = msg.payload\nif (data.co2 > 800 || data.temperature > 26) {\n    msg.payload = \"ON\"\n} else {\n    msg.payload = \"OFF\"\n}\nmsg.topic = \"smart/salle1/ventilation\"\nreturn msg;\n",
-        "outputs": 1,
+        "func": "const data = msg.payload;\n\n// Déterminer la commande automatique\nlet commande = \"OFF\";\n\nif (Number(data.co2) > 800 || Number(data.temperature) > 26) {\n    commande = \"ON\";\n}\n\n// Sortie 1 : commande de ventilation\n// Sortie 2 : température\n// Sortie 3 : humidité\n// Sortie 4 : CO2\n\nreturn [\n    {\n        topic: \"smartenv/salle2/ventilation\",\n        payload: commande\n    },\n    {\n        payload: Number(data.temperature)\n    },\n    {\n        payload: Number(data.humidite)\n    },\n    {\n        payload: Number(data.co2)\n    }\n];\n",
+        "outputs": 4,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 460,
-        "y": 400,
+        "x": 520,
+        "y": 640,
         "wires": [
             [
-                "ee1a63cd463143b5"
-            ]
+                "4ea225116b1cdb22",
+                "4e7ea348059ef882"
+            ],
+            [],
+            [],
+            []
         ]
     },
     {
-        "id": "38980eca13c00fe6",
+        "id": "37117c7c3305944a",
         "type": "function",
-        "z": "f6f2187d.f17ca8",
+        "z": "f88d1ae351fa23a2",
         "name": "function 3",
-        "func": "const data = msg.payload\nif (data.co2 > 800 || data.temperature > 26) {\n    msg.payload = \"ON\"\n} else {\n    msg.payload = \"OFF\"\n}\nmsg.topic = \"smart/salle1/ventilation\"\nreturn msg;\n",
-        "outputs": 1,
+        "func": "const data = msg.payload\nlet commande = \"OFF\";\nif (data.co2 > 800 || data.temperature > 26) {\n    msg.payload = \"ON\";\n} \nreturn[\n    {topic : \"smart/salle3/ventilation\", payload : commande},\n    {payload: data.temperature} , \n    {payload : data.humidite},\n    {payload : data.co2}\n];\n",
+        "outputs": 4,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 460,
-        "y": 520,
+        "x": 520,
+        "y": 760,
         "wires": [
             [
-                "3cd1879d954cbf21"
-            ]
+                "9d6b5af7700c6c9b"
+            ],
+            [],
+            [],
+            []
         ]
     },
     {
-        "id": "68befcfd4b1b64f7",
+        "id": "d12c328b285912b4",
         "type": "mqtt out",
-        "z": "f6f2187d.f17ca8",
+        "z": "f88d1ae351fa23a2",
         "name": "venlation 1",
         "topic": "smartenv/salle1/ventilation",
         "qos": "2",
@@ -200,15 +218,15 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "8ecb9d1287f1189a",
-        "x": 650,
-        "y": 260,
+        "broker": "12635b852e5a1d66",
+        "x": 850,
+        "y": 240,
         "wires": []
     },
     {
-        "id": "ee1a63cd463143b5",
+        "id": "4ea225116b1cdb22",
         "type": "mqtt out",
-        "z": "f6f2187d.f17ca8",
+        "z": "f88d1ae351fa23a2",
         "name": "ventilation 2",
         "topic": "smartenv/salle2/ventilation",
         "qos": "2",
@@ -218,31 +236,263 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "8ecb9d1287f1189a",
-        "x": 650,
-        "y": 400,
+        "broker": "12635b852e5a1d66",
+        "x": 710,
+        "y": 640,
         "wires": []
     },
     {
-        "id": "3cd1879d954cbf21",
+        "id": "9d6b5af7700c6c9b",
         "type": "mqtt out",
-        "z": "f6f2187d.f17ca8",
+        "z": "f88d1ae351fa23a2",
         "name": "ventilation 3",
         "topic": "smartenv/salle3/ventilation",
-        "qos": "",
+        "qos": "2",
         "retain": "",
         "respTopic": "",
         "contentType": "",
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "",
-        "x": 650,
-        "y": 520,
+        "broker": "12635b852e5a1d66",
+        "x": 710,
+        "y": 760,
         "wires": []
     },
     {
-        "id": "8ecb9d1287f1189a",
+        "id": "23a01241ad5a3f58",
+        "type": "debug",
+        "z": "f88d1ae351fa23a2",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "4e7ea348059ef882",
+        "type": "debug",
+        "z": "f88d1ae351fa23a2",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "4f8bf5236b1f516e",
+        "type": "ui_gauge",
+        "z": "f88d1ae351fa23a2",
+        "name": "",
+        "group": "90a33498888d6482",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "temperature",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 850,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "f78aaf7a538342b5",
+        "type": "ui_gauge",
+        "z": "f88d1ae351fa23a2",
+        "name": "",
+        "group": "90a33498888d6482",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidite",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 860,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "9925b4544e4f8547",
+        "type": "ui_gauge",
+        "z": "f88d1ae351fa23a2",
+        "name": "",
+        "group": "90a33498888d6482",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "CO2",
+        "label": "ppm",
+        "format": "{{value}}",
+        "min": "400",
+        "max": "2000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 870,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "0974c0b3b766acbb",
+        "type": "ui_text",
+        "z": "f88d1ae351fa23a2",
+        "group": "90a33498888d6482",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Etas de ventilation",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 870,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "baf946ed2d7750eb",
+        "type": "ui_switch",
+        "z": "f88d1ae351fa23a2",
+        "name": "",
+        "label": "forcing ventilation ",
+        "tooltip": "",
+        "group": "90a33498888d6482",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "smartenv/salle1/ventilation",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "ON",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "OFF",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 630,
+        "y": 240,
+        "wires": [
+            [
+                "d12c328b285912b4",
+                "0974c0b3b766acbb"
+            ]
+        ]
+    },
+    {
+        "id": "efa5f1f644fd888c",
+        "type": "ui_switch",
+        "z": "f88d1ae351fa23a2",
+        "name": "",
+        "label": "MODE AUTO",
+        "tooltip": "",
+        "group": "90a33498888d6482",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 160,
+        "y": 260,
+        "wires": [
+            [
+                "dffb0b4c88034c1c"
+            ]
+        ]
+    },
+    {
+        "id": "dffb0b4c88034c1c",
+        "type": "change",
+        "z": "f88d1ae351fa23a2",
+        "name": "save auto mode",
+        "rules": [
+            {
+                "t": "set",
+                "p": "auto_salle1",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "12635b852e5a1d66",
         "type": "mqtt-broker",
         "name": "",
         "broker": "broker",
@@ -271,5 +521,33 @@
         "willMsg": {},
         "userProps": "",
         "sessionExpiry": ""
+    },
+    {
+        "id": "90a33498888d6482",
+        "type": "ui_group",
+        "name": "salle 1",
+        "tab": "40d502dc644e237e",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "40d502dc644e237e",
+        "type": "ui_tab",
+        "name": "smart environement",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "3b1c45cbd65eb64a",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
     }
 ]
